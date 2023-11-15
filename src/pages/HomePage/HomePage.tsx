@@ -1,16 +1,23 @@
-// import { Button } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
+import DeviceTable from '../../components/DeviceTable';
 import ToolBar from '../../components/ToolBar/ToolBar';
+import { getDeviceSlice } from '../../features/devices/devicesSelector';
+import { useGetDevices } from '../../hooks/useGetDevices';
 
 function HomePage() {
-  // const navigate = useNavigate();
-  // const handleClick = () => {
-  //   navigate('/product/123');
-  // };
+  useGetDevices();
+
+  const { isLoading, devices } = getDeviceSlice();
 
   return (
     <>
-      <ToolBar />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <ToolBar />
+          <DeviceTable devices={devices} />
+        </>
+      )}
     </>
   );
 }

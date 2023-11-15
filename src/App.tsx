@@ -2,8 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import HomePage from './pages/HomePage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
-import { useGetDevices } from './hooks/useGetDevices';
-
 // Data
 // https://static.ui.com/fingerprint/ui/public.json
 
@@ -13,8 +11,6 @@ import { useGetDevices } from './hooks/useGetDevices';
 // 13236866ea3d_257x257.png
 
 function App() {
-  useGetDevices();
-
   return (
     <>
       <Header />

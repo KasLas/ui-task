@@ -8,3 +8,7 @@ export function getDeviceSlice(): DevicesSlice {
 export function getDevices(): Device[] {
   return AppUseSelector((state) => state.devices.devices);
 }
+
+export function getIsLoading(): boolean {
+  return AppUseSelector((state) => state.devices.isLoading);
+}

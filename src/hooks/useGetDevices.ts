@@ -11,5 +11,6 @@ export function useGetDevices() {
     if (isEmpty(devices)) {
       fetchDevices();
     }
-  }, [devices, fetchDevices]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }

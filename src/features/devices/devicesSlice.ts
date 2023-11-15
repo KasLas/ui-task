@@ -10,6 +10,7 @@ const initialState: DevicesSlice = {
 };
 
 async function getDevicesData() {
+  console.log('get called');
   try {
     const response = await axios.get(DEVICES_URL);
 
@@ -33,7 +34,7 @@ const transitionsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getDevices.fulfilled, (state, action) => {
-      const devices = action.payload;
+      const devices = action.payload.devices;
 
       state.devices = devices;
 
