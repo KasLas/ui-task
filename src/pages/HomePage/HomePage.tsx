@@ -1,4 +1,4 @@
-import DeviceTable from '../../components/DeviceTable';
+import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import { getDeviceSlice } from '../../features/devices/devicesSelector';
 import { useGetDevices } from '../../hooks/useGetDevices';
@@ -15,7 +15,7 @@ function HomePage() {
       ) : (
         <>
           <ToolBar />
-          <DeviceTable devices={devices} />
+          <DeviceListContainer devices={devices} />
         </>
       )}
     </>
