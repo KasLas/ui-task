@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import * as S from './styles';
 
-type ListItem = {
+export type ListItem = {
   id: string;
   img: string;
   productLine: string;
@@ -22,6 +22,11 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
 
   return (
     <ul>
+      <S.ItemWrapper>
+        <p>{`${listData.length} devices`}</p>
+        <p>PRODUCT LINE</p>
+        <p>NAME</p>
+      </S.ItemWrapper>
       {listData.map((item) => {
         return (
           <S.HoverContainer

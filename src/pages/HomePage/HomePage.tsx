@@ -1,12 +1,22 @@
+import { useState } from 'react';
 import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import { getDeviceSlice } from '../../features/devices/devicesSelector';
 import { useGetDevices } from '../../hooks/useGetDevices';
 
 function HomePage() {
+  const [isList, setIsList] = useState(true);
   useGetDevices();
 
   const { isLoading, devices } = getDeviceSlice();
+
+  function switchToList() {
+    setIsList(true);
+  }
+
+  function switchToGrid() {
+    setIsList(false);
+  }
 
   return (
     <>
@@ -14,8 +24,8 @@ function HomePage() {
         <p>Loading...</p>
       ) : (
         <>
-          <ToolBar />
-          <DeviceListContainer devices={devices} />
+          <ToolBar gridClick={switchToGrid} listClick={switchToList} />
+          <DeviceListContainer devices={devices} isList={isList} />
         </>
       )}
     </>

@@ -21,10 +21,7 @@ const icons: IconsType = {
   back: backArrow,
 };
 
-const IconButton: React.FC<IconButtonProps> = ({
-  variant,
-  onClick = () => {},
-}) => {
+const IconButton: React.FC<IconButtonProps> = ({ variant, onClick }) => {
   return (
     <S.ButtonWrapper onClick={onClick}>
       <img src={icons[variant as keyof IconsType]} alt="icon button" />
