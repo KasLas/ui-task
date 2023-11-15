@@ -5,13 +5,13 @@ import ProductDetailsPage from './pages/ProductDetailsPage';
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
