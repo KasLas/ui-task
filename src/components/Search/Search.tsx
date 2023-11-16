@@ -2,7 +2,13 @@ import React from 'react';
 import SearchIcon from '../../assets/Search-icon.svg';
 import * as S from './styles';
 
-const Search = () => {
+interface SearchProps {
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}
+
+const Search: React.FC<SearchProps> = ({ onChange }) => {
   return (
     <div>
       <S.Search>
@@ -12,6 +18,7 @@ const Search = () => {
         <S.StyledInputBase
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
+          onChange={onChange}
         />
       </S.Search>
     </div>

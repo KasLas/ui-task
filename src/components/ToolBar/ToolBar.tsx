@@ -7,12 +7,19 @@ import React from 'react';
 interface ToolBarProps {
   listClick: () => void;
   gridClick: () => void;
+  handleSearchInput: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
-const ToolBar: React.FC<ToolBarProps> = ({ listClick, gridClick }) => {
+const ToolBar: React.FC<ToolBarProps> = ({
+  listClick,
+  gridClick,
+  handleSearchInput,
+}) => {
   return (
     <S.ToolBarWrapper>
-      <Search />
+      <Search onChange={handleSearchInput} />
       <S.Right>
         <IconButton variant="list" onClick={listClick} />
         <IconButton variant="grid" onClick={gridClick} />
