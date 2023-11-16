@@ -14,8 +14,8 @@ const ToolBar: React.FC<ToolBarProps> = ({ listClick, gridClick }) => {
     <S.ToolBarWrapper>
       <Search />
       <S.Right>
-        <IconButton variant="grid" onClick={gridClick} />
         <IconButton variant="list" onClick={listClick} />
+        <IconButton variant="grid" onClick={gridClick} />
         <Select />
       </S.Right>
     </S.ToolBarWrapper>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '../../utils/constants';
 
 export const GridContainer = styled.div`
   display: flex;
@@ -8,9 +9,9 @@ export const GridContainer = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 235px;
+  min-width: 235px;
   border-radius: 8px;
-  border: solid 1px #c4c4c4;
+  border: solid 1px ${COLORS.darkBorder};
 `;
 
 export const ImgWrapper = styled.div`
@@ -21,5 +22,4 @@ export const ImgWrapper = styled.div`
 export const TextWrapper = styled.div`
   width: 100%;
   padding: 12px;
-  color: #838691;
 `;

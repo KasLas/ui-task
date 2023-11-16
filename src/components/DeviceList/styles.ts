@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '../../utils/constants';
 
 export const ItemWrapper = styled.li`
   width: 100%;
@@ -6,7 +7,8 @@ export const ItemWrapper = styled.li`
   grid-template-columns: 130px 250px 1fr;
   align-items: center;
   column-gap: 16px;
-  border-bottom: solid 1px #c4c4c4;
+  border-bottom: solid 1px ${COLORS.defaultBorder};
+  padding: 2px 0;
 `;
 
 export const ImgWrapper = styled.div`
@@ -16,6 +18,10 @@ export const ImgWrapper = styled.div`
 export const HoverContainer = styled.div`
   :hover {
     cursor: pointer;
-    background: #f6f6f8;
+    background: #fbfbfb;
   }
+`;
+
+export const BoldParagraph = styled.p`
+  font-weight: 700;
 `;

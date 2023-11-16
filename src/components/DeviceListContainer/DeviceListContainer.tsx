@@ -17,7 +17,7 @@ const DeviceListContainer: React.FC<DeviceListProps> = ({
   const listData = useMemo(() => {
     return devices.map((device) => {
       const smallIconDimensions = isList
-        ? device.icon.resolutions[1]
+        ? device.icon.resolutions[0]
         : device.icon.resolutions[4];
       return {
         id: device.id,

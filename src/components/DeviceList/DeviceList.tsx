@@ -24,8 +24,8 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
     <ul>
       <S.ItemWrapper>
         <p>{`${listData.length} devices`}</p>
-        <p>PRODUCT LINE</p>
-        <p>NAME</p>
+        <S.BoldParagraph>PRODUCT LINE</S.BoldParagraph>
+        <S.BoldParagraph>NAME</S.BoldParagraph>
       </S.ItemWrapper>
       {listData.map((item) => {
         return (
