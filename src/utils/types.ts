@@ -40,3 +40,8 @@ export type DevicesSlice = {
   isLoading: boolean;
   error: string;
 };
+
+export type FilterOptions = {
+  value: string;
+  name: string;
+};

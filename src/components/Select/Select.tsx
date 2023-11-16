@@ -1,14 +1,19 @@
+import React from 'react';
 import { Box, FormControl, InputLabel, MenuItem } from '@mui/material';
 import MuSelect, { SelectChangeEvent } from '@mui/material/Select';
-import React from 'react';
+import { FilterOptions } from '../../utils/types';
 
-const Select = () => {
-  const [age, setAge] = React.useState('');
+interface SelectOptions {
+  filterOptions: FilterOptions[];
+  onChange: (event: SelectChangeEvent) => void;
+  value: string;
+}
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
+const Select: React.FC<SelectOptions> = ({
+  filterOptions,
+  onChange,
+  value,
+}) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -16,13 +21,17 @@ const Select = () => {
         <MuSelect
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={value}
           label="Filter"
-          onChange={handleChange}
+          onChange={onChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {filterOptions.map((option) => {
+            return (
+              <MenuItem key={option.value} value={option.value}>
+                {option.name}
+              </MenuItem>
+            );
+          })}
         </MuSelect>
       </FormControl>
     </Box>
