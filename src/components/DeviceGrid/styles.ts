@@ -12,6 +12,9 @@ export const ContentWrapper = styled.div`
   min-width: 235px;
   border-radius: 8px;
   border: solid 1px ${COLORS.darkBorder};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ImgWrapper = styled.div`
