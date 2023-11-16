@@ -32,6 +32,10 @@ function HomePage() {
     setFilterValue(event?.target.value as string);
   }
 
+  function handleSearchClear() {
+    setSearchTerm('');
+  }
+
   const searchDevices = useMemo(() => {
     return searchTerm
       ? devices.filter((device) =>
@@ -81,6 +85,8 @@ function HomePage() {
             filterOptions={filterOptions}
             onFilterChange={handleFilterSelect}
             filterValue={filterValue}
+            handleSearchClear={handleSearchClear}
+            searchTerm={searchTerm}
           />
           <DeviceListContainer devices={renderDevices} isList={isList} />
         </>

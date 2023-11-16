@@ -15,6 +15,8 @@ interface ToolBarProps {
   filterOptions: FilterOptions[];
   onFilterChange: (event: SelectChangeEvent) => void;
   filterValue: string;
+  handleSearchClear: () => void;
+  searchTerm: string;
 }
 
 const ToolBar: React.FC<ToolBarProps> = ({
@@ -24,10 +26,16 @@ const ToolBar: React.FC<ToolBarProps> = ({
   filterOptions,
   onFilterChange,
   filterValue,
+  handleSearchClear,
+  searchTerm,
 }) => {
   return (
     <S.ToolBarWrapper>
-      <Search onChange={handleSearchInput} />
+      <Search
+        onChange={handleSearchInput}
+        onCloseClick={handleSearchClear}
+        value={searchTerm}
+      />
       <S.Right>
         <IconButton variant="list" onClick={listClick} />
         <IconButton variant="grid" onClick={gridClick} />

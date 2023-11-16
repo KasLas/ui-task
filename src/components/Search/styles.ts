@@ -1,6 +1,7 @@
-import { InputBase, styled } from '@mui/material';
+import { InputBase, styled as muStyled } from '@mui/material';
+import styled from 'styled-components';
 
-export const Search = styled('div')(({ theme }) => ({
+export const Search = muStyled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: 4,
   backgroundColor: ' #F6F6F8',
@@ -9,7 +10,7 @@ export const Search = styled('div')(({ theme }) => ({
   width: '100%',
 }));
 
-export const SearchIconWrapper = styled('div')(({ theme }) => ({
+export const SearchIconWrapper = muStyled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -19,7 +20,18 @@ export const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+export const closeIconWrapper = muStyled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  right: 0,
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 99,
+}));
+
+export const StyledInputBase = muStyled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -29,3 +41,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: '100%',
   },
 }));
+
+export const SearchContainer = styled.div`
+  width: 350px;
+`;
