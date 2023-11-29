@@ -11,9 +11,11 @@
 5. IN the project folder open a new linux terminal and run the following `bun install` to install all the project dependencies.
 6. run `bun run dev` to launch the project
 
-- this project is run by `Bun`.
-- To run this project locally follow the [instructions here](https://bun.sh/docs/installation)
-- CD in to the project folder and run `bun install` and `bun run dev`
+## FOR LINUX AND MAC USERS
+
+1. this project is run by `Bun`.
+2. To run this project locally follow the [instructions here](https://bun.sh/docs/installation)
+3. CD in to the project folder and run `bun install` and `bun run dev`
 
 # Project description
 
