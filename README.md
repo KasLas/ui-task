@@ -1,5 +1,16 @@
 # Project set-Up
 
+## FOR WINDOWS USERS
+
+- bun is not currently supported natively, need to set up WSL wit ha linux distro.
+
+1. If your machine does not have a WSL linux distro set up follow these steps
+2. Follow the steps 2-4 in this [documentation](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#2-install-wsl)
+3. To install NODE.js on the newly installed Ubuntu subsystem Follow the steps in this [documentation](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#2-install-wsl)
+4. install bun globally on the Linux subsystem using this command `npm install bun -g`
+5. IN the project folder open a new linux terminal and run the following `bun install` to install all the project dependencies.
+6. run `bun run dev` to launch the project
+
 - this project is run by `Bun`.
 - To run this project locally follow the [instructions here](https://bun.sh/docs/installation)
 - CD in to the project folder and run `bun install` and `bun run dev`
