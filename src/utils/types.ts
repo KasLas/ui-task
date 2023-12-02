@@ -45,3 +45,8 @@ export type FilterOptions = {
   value: string;
   name: string;
 };
+
+export type QueryDeviceData = {
+  devices: Device[];
+  version: string;
+};

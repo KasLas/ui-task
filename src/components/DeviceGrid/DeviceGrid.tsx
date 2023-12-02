@@ -4,7 +4,7 @@ import { ListItem } from '../DeviceList/DeviceList';
 import * as S from './styles';
 
 interface DeviceGridProps {
-  gridData: ListItem[];
+  gridData?: ListItem[];
 }
 
 const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
@@ -16,7 +16,7 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
 
   return (
     <S.GridContainer>
-      {gridData.map((item) => {
+      {gridData?.map((item) => {
         return (
           <S.ContentWrapper
             key={item.id}
@@ -25,7 +25,7 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
             }}
           >
             <S.ImgWrapper>
-              <img src={item.img} alt="product image" />
+              <img src={item.img} alt='product image' />
             </S.ImgWrapper>
             <S.TextWrapper>
               <h4> {item.name}</h4>

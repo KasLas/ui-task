@@ -6,7 +6,7 @@ import DeviceList from '../DeviceList';
 import DeviceGrid from '../DeviceGrid';
 
 export interface DeviceListProps {
-  devices: Device[];
+  devices?: Device[];
   isList: boolean;
 }
 
@@ -15,7 +15,7 @@ const DeviceListContainer: React.FC<DeviceListProps> = ({
   isList,
 }) => {
   const listData = useMemo(() => {
-    return devices.map((device) => {
+    return devices?.map((device) => {
       const smallIconDimensions = isList
         ? device.icon.resolutions[0]
         : device.icon.resolutions[4];

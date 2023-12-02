@@ -10,7 +10,7 @@ export type ListItem = {
 };
 
 interface ListDataProps {
-  listData: ListItem[];
+  listData?: ListItem[];
 }
 
 const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
@@ -23,11 +23,11 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
   return (
     <ul>
       <S.ItemWrapper>
-        <p>{`${listData.length} devices`}</p>
+        <p>{`${listData?.length} devices`}</p>
         <S.BoldParagraph>PRODUCT LINE</S.BoldParagraph>
         <S.BoldParagraph>NAME</S.BoldParagraph>
       </S.ItemWrapper>
-      {listData.map((item) => {
+      {listData?.map((item) => {
         return (
           <S.HoverContainer
             key={item.id}
@@ -37,7 +37,7 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
           >
             <S.ItemWrapper>
               <S.ImgWrapper>
-                <img src={item.img} alt="product picture" />
+                <img src={item.img} alt='product picture' />
               </S.ImgWrapper>
               <p>{item.productLine}</p>
               <p>{item.name}</p>
