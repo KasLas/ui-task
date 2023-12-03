@@ -1,4 +1,16 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme, createMultiStyleConfigHelpers } from '@chakra-ui/react';
+import { checkboxAnatomy } from '@chakra-ui/anatomy';
+
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(checkboxAnatomy.keys);
+
+const baseStyle = definePartsStyle({
+  control: {
+    borderRadius: 4,
+  },
+});
+
+const checkboxTheme = defineMultiStyleConfig({ baseStyle });
 
 export const extendedTheme = extendTheme({
   styles: {
@@ -14,4 +26,5 @@ export const extendedTheme = extendTheme({
     neutral3: '#EDEDF0',
     neutral8: '#838691',
   },
+  components: { Checkbox: checkboxTheme },
 });
