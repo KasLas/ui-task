@@ -1,11 +1,11 @@
 import IconButton from '../IconButton';
 import { HStack, Input, Text } from '@chakra-ui/react';
-// import Search from '../Search';
 import Select from '../Select';
 import React from 'react';
 import { FilterOptions } from '../../utils/types';
 // import { SelectChangeEvent } from '@mui/material';
 import LogoDefault from '../Icons/LogoDefault';
+import Search from '../Search/Search';
 
 interface ToolBarProps {
   listClick: () => void;
@@ -31,13 +31,12 @@ const ToolBar: React.FC<ToolBarProps> = ({
   searchTerm,
 }) => {
   return (
-    <HStack justifyContent={'space-between'}>
-      <Input />
-      {/* <Search
+    <HStack justifyContent={'space-between'} p={'8px 30px'}>
+      <Search
         onChange={handleSearchInput}
         onCloseClick={handleSearchClear}
         value={searchTerm}
-      /> */}
+      />
       <HStack>
         <IconButton variant='list' onClick={listClick} />
         <IconButton variant='grid' onClick={gridClick} />
