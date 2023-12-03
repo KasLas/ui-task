@@ -1,15 +1,12 @@
-import IconButton from '../IconButton';
-import { HStack, Input, Text } from '@chakra-ui/react';
-import Select from '../Select';
 import React from 'react';
+import { HStack } from '@chakra-ui/react';
+import Select from '../Select';
 import { FilterOptions } from '../../utils/types';
-// import { SelectChangeEvent } from '@mui/material';
-import LogoDefault from '../Icons/LogoDefault';
 import Search from '../Search/Search';
+import LayoutSwitch from '../LayoutSwitch';
 
 interface ToolBarProps {
-  listClick: () => void;
-  gridClick: () => void;
+  layoutToggle: (select: string) => void;
   handleSearchInput: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -21,8 +18,7 @@ interface ToolBarProps {
 }
 
 const ToolBar: React.FC<ToolBarProps> = ({
-  listClick,
-  gridClick,
+  layoutToggle,
   handleSearchInput,
   filterOptions,
   onFilterChange,
@@ -38,8 +34,7 @@ const ToolBar: React.FC<ToolBarProps> = ({
         value={searchTerm}
       />
       <HStack>
-        <IconButton variant='list' onClick={listClick} />
-        <IconButton variant='grid' onClick={gridClick} />
+        <LayoutSwitch layoutToggle={layoutToggle} />
         <Select
           filterOptions={filterOptions}
           onChange={onFilterChange}

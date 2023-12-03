@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { SelectChangeEvent } from '@mui/material/Select';
 import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import { QueryDeviceData, FilterOptions, Line } from '../../utils/types';
@@ -11,16 +10,12 @@ function HomePage({
   data?: QueryDeviceData;
   status: string;
 }) {
-  const [isList, setIsList] = useState(true);
+  const [layout, setLayout] = useState('list');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterValue, setFilterValue] = useState('');
 
-  function switchToList() {
-    setIsList(true);
-  }
-
-  function switchToGrid() {
-    setIsList(false);
+  function layoutToggle(select: string) {
+    setLayout(select);
   }
 
   function handleSearchInput(
@@ -29,7 +24,7 @@ function HomePage({
     setSearchTerm(e.target.value.toLocaleLowerCase());
   }
 
-  function handleFilterSelect(event: SelectChangeEvent) {
+  function handleFilterSelect(event: any) {
     setFilterValue(event?.target.value as string);
   }
 
@@ -82,8 +77,7 @@ function HomePage({
       {status === 'success' && data?.devices ? (
         <>
           <ToolBar
-            gridClick={switchToGrid}
-            listClick={switchToList}
+            layoutToggle={layoutToggle}
             handleSearchInput={handleSearchInput}
             filterOptions={filterOptions}
             onFilterChange={handleFilterSelect}
@@ -91,7 +85,7 @@ function HomePage({
             handleSearchClear={handleSearchClear}
             searchTerm={searchTerm}
           />
-          <DeviceListContainer devices={renderDevices} isList={isList} />
+          <DeviceListContainer devices={renderDevices} layout={layout} />
         </>
       ) : (
         <></>
