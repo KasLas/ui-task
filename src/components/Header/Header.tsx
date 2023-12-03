@@ -1,12 +1,20 @@
+import { HStack, Heading, Text } from '@chakra-ui/react';
 import Logo from '../Logo';
-import * as S from './styles';
 
 function Header() {
   return (
-    <S.Container>
-      <Logo title="Devices" />
-      <p>Kaspars Lasinskis</p>
-    </S.Container>
+    <HStack
+      as='header'
+      justifyContent={'space-between'}
+      bg={'neutral2'}
+      pr={'28px'}
+    >
+      <HStack gap={4}>
+        <Logo />
+        <Heading color={'neutral8'}>Devices</Heading>
+      </HStack>
+      <Text>Kaspars Lasinskis</Text>
+    </HStack>
   );
 }
 
