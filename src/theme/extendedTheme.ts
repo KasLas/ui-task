@@ -9,7 +9,9 @@ export const extendedTheme = extendTheme({
     },
   },
   colors: {
+    neutral0: '#FFF',
     neutral2: '#F6F6F8',
+    neutral3: '#EDEDF0',
     neutral8: '#838691',
   },
 });

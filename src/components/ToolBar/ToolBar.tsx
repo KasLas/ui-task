@@ -27,13 +27,19 @@ const ToolBar: React.FC<ToolBarProps> = ({
   searchTerm,
 }) => {
   return (
-    <HStack justifyContent={'space-between'} p={'8px 30px'}>
+    <HStack
+      justifyContent={'space-between'}
+      p={'8px 30px'}
+      borderBottom={'solid'}
+      borderBottomColor={'neutral3'}
+      borderBottomWidth={'1px'}
+    >
       <Search
         onChange={handleSearchInput}
         onCloseClick={handleSearchClear}
         value={searchTerm}
       />
-      <HStack>
+      <HStack gap={4}>
         <LayoutSwitch layoutToggle={layoutToggle} />
         <Select
           filterOptions={filterOptions}
