@@ -61,7 +61,7 @@ function HomePage({
       const obj: Line = JSON.parse(opt);
       return { value: obj.id, name: obj.name };
     });
-    return [{ value: '', name: 'All Devices' }, ...opt];
+    return [{ value: 'all', name: 'All Devices' }, ...opt];
   }, [data?.devices]);
 
   if (status === 'error') {
