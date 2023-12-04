@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import DeviceCard from '../DeviceCard';
 import { ListItem } from '../DeviceList/DeviceList';
 import * as S from './styles';
 
@@ -18,20 +19,11 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
     <S.GridContainer>
       {gridData?.map((item) => {
         return (
-          <S.ContentWrapper
+          <DeviceCard
             key={item.id}
-            onClick={() => {
-              handleCardClick(item.id);
-            }}
-          >
-            <S.ImgWrapper>
-              <img src={item.img} alt='product image' />
-            </S.ImgWrapper>
-            <S.TextWrapper>
-              <h4> {item.name}</h4>
-              <p>{item.productLine}</p>
-            </S.TextWrapper>
-          </S.ContentWrapper>
+            item={item}
+            onClickHandler={handleCardClick}
+          />
         );
       })}
     </S.GridContainer>

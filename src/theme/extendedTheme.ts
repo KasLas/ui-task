@@ -15,7 +15,10 @@ export const extendedTheme = extendTheme({
     neutral0: '#FFF',
     neutral2: '#F6F6F8',
     neutral3: '#EDEDF0',
+    neutral4: '#DBDCE1',
     neutral8: '#838691',
+    text2: 'rgba(0, 0, 0, 0.65)',
+    text3: 'rgba(0, 0, 0, 0.45)',
   },
   components: {
     Checkbox: checkboxTheme,
