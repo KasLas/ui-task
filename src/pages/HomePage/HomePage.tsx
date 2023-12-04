@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Spinner, Center, Alert, AlertIcon } from '@chakra-ui/react';
 import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
 import { QueryDeviceData, FilterOptions, Line } from '../../utils/types';
@@ -63,11 +64,20 @@ function HomePage({
   }, [data?.devices]);
 
   if (status === 'error') {
-    return <h3>Something went horribly wrong</h3>;
+    return (
+      <Alert status='error'>
+        <AlertIcon />
+        There was an error processing your request
+      </Alert>
+    );
   }
 
   if (status === 'pending') {
-    return <p>Loading...</p>;
+    return (
+      <Center mt={'200px'}>
+        <Spinner size={'xl'} thickness='4px' color='neutral8' />
+      </Center>
+    );
   }
 
   return (

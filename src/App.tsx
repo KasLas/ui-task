@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import Header from './components/Header/Header';
 import HomePage from './pages/HomePage';
@@ -20,7 +21,7 @@ function App() {
   });
 
   return (
-    <>
+    <Box maxW={'1366px'} mr={'auto'} ml={'auto'}>
       <Header />
       <Routes>
         <Route path='/' element={<HomePage data={data} status={status} />} />
@@ -29,7 +30,7 @@ function App() {
           element={<ProductDetailsPage data={data} status={status} />}
         />
       </Routes>
-    </>
+    </Box>
   );
 }
 

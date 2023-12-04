@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
-import * as S from './styles';
+import { Box, VStack, Text, Grid, GridItem } from '@chakra-ui/react';
 
 export type ListItem = {
   id: string;
@@ -21,31 +20,46 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
   }
 
   return (
-    <ul>
-      <S.ItemWrapper>
-        <p>{`${listData?.length} devices`}</p>
-        <S.BoldParagraph>PRODUCT LINE</S.BoldParagraph>
-        <S.BoldParagraph>NAME</S.BoldParagraph>
-      </S.ItemWrapper>
+    <VStack>
+      <Grid gridTemplateColumns={'130px 250px 1fr'} gap={4} w={'full'}>
+        <GridItem>
+          <Text>{`${listData?.length} devices`}</Text>
+        </GridItem>
+        <GridItem>
+          <Text fontWeight={'700'}>PRODUCT LINE</Text>
+        </GridItem>
+        <GridItem>
+          <Text fontWeight={'700'}>NAME</Text>
+        </GridItem>
+      </Grid>
       {listData?.map((item) => {
         return (
-          <S.HoverContainer
+          <Box
+            w={'full'}
+            borderBottom={'solid 1px'}
+            borderBottomColor={'neutral3'}
+            cursor={'pointer'}
+            _hover={{ bg: 'hover' }}
             key={item.id}
             onClick={() => {
               handleItemClick(item.id);
             }}
           >
-            <S.ItemWrapper>
-              <S.ImgWrapper>
+            <Grid gridTemplateColumns={'130px 250px 1fr'} gap={4}>
+              <GridItem>
                 <img src={item.img} alt='product picture' />
-              </S.ImgWrapper>
-              <p>{item.productLine}</p>
-              <p>{item.name}</p>
-            </S.ItemWrapper>
-          </S.HoverContainer>
+              </GridItem>
+              <GridItem>
+                <Text>{item.productLine}</Text>
+              </GridItem>
+              <GridItem>
+                <Text>{item.name}</Text>
+              </GridItem>
+            </Grid>
+          </Box>
         );
       })}
-    </ul>
+    </VStack>
   );
 };
 

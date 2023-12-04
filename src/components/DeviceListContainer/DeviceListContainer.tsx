@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
+import { Box } from '@chakra-ui/react';
 import { Device } from '../../utils/types';
-import * as S from './styles';
 import { IMG_BASE_URL } from '../../utils/constants';
 import DeviceList from '../DeviceList';
 import DeviceGrid from '../DeviceGrid';
@@ -30,13 +30,13 @@ const DeviceListContainer: React.FC<DeviceListProps> = ({
   }, [devices, layout]);
 
   return (
-    <S.TableWrapper>
+    <Box p={'23px 24px 80px 80px'}>
       {layout === 'list' ? (
         <DeviceList listData={listData} />
       ) : (
         <DeviceGrid gridData={listData} />
       )}
-    </S.TableWrapper>
+    </Box>
   );
 };
 
