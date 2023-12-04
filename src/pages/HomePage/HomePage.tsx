@@ -12,7 +12,7 @@ function HomePage({
 }) {
   const [layout, setLayout] = useState('list');
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState<string[]>([]);
 
   function layoutToggle(select: string) {
     setLayout(select);
@@ -25,7 +25,7 @@ function HomePage({
   }
 
   function handleFilterSelect(event: any) {
-    setFilterValue(event?.target.value as string);
+    setFilterValue(event);
   }
 
   function handleSearchClear() {
@@ -41,11 +41,9 @@ function HomePage({
   }, [data?.devices, searchTerm]);
 
   const renderDevices = useMemo(() => {
-    return filterValue
-      ? searchDevices?.filter(
-          (device) =>
-            device.line.id.toLocaleLowerCase() ===
-            filterValue.toLocaleLowerCase()
+    return filterValue.length > 0
+      ? searchDevices?.filter((device) =>
+          filterValue.includes(device.line.id.toLocaleLowerCase())
         )
       : searchDevices;
   }, [filterValue, searchDevices]);
@@ -61,7 +59,7 @@ function HomePage({
       const obj: Line = JSON.parse(opt);
       return { value: obj.id, name: obj.name };
     });
-    return [{ value: 'all', name: 'All Devices' }, ...opt];
+    return opt;
   }, [data?.devices]);
 
   if (status === 'error') {
@@ -81,7 +79,6 @@ function HomePage({
             handleSearchInput={handleSearchInput}
             filterOptions={filterOptions}
             onFilterChange={handleFilterSelect}
-            filterValue={filterValue}
             handleSearchClear={handleSearchClear}
             searchTerm={searchTerm}
           />

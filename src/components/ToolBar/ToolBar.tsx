@@ -12,7 +12,6 @@ interface ToolBarProps {
   ) => void;
   filterOptions: FilterOptions[];
   onFilterChange: (event: any) => void;
-  filterValue: string;
   handleSearchClear: () => void;
   searchTerm: string;
 }
@@ -22,7 +21,6 @@ const ToolBar: React.FC<ToolBarProps> = ({
   handleSearchInput,
   filterOptions,
   onFilterChange,
-  filterValue,
   handleSearchClear,
   searchTerm,
 }) => {

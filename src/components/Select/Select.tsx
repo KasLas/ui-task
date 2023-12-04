@@ -19,7 +19,7 @@ interface SelectOptions {
   value: string;
 }
 
-const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
+const Select: React.FC<SelectOptions> = ({ filterOptions, onChange }) => {
   return (
     <Popover>
       <PopoverTrigger>
@@ -36,13 +36,7 @@ const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
       >
         <PopoverHeader padding={'12px 14px 12px 24px'}>Filter</PopoverHeader>
         <PopoverCloseButton />
-        <CheckboxGroup
-          colorScheme='green'
-          defaultValue={['all']}
-          onChange={(e) => {
-            console.log(e);
-          }}
-        >
+        <CheckboxGroup colorScheme='green' onChange={onChange}>
           <Box p={'20px'}>
             <VStack alignItems={'flex-start'} gap={4}>
               {filterOptions.map((option) => {
