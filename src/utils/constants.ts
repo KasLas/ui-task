@@ -9,5 +9,5 @@ export enum COLORS {
 export enum IMG_DIMENSIONS {
   sm = 25,
   md = 101,
-  xl = 256,
+  xl = 257,
 }

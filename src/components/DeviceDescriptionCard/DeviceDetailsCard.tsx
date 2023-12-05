@@ -1,18 +1,22 @@
 import React from 'react';
 import { Device } from '../../utils/types';
-import { IMG_BASE_URL } from '../../utils/constants';
+import { IMG_BASE_URL, IMG_DIMENSIONS } from '../../utils/constants';
 import * as S from './styles';
+import { getImgDimensions } from '../DeviceListContainer/utils';
 
 interface DeviceDetailsProps {
   device: Device;
 }
 
 const DeviceDetailsCard: React.FC<DeviceDetailsProps> = ({ device }) => {
-  const largeIconDimensions = device?.icon.resolutions[4];
-  const imgUrl = `${IMG_BASE_URL}${device.icon.id}_${largeIconDimensions[0]}x${largeIconDimensions[1]}.png`;
+  const resolution = getImgDimensions(
+    device.icon.resolutions,
+    IMG_DIMENSIONS.xl
+  );
+  const imgUrl = `${IMG_BASE_URL}${device.icon.id}_${resolution.x}x${resolution.y}.png`;
   return (
     <S.CardContainer>
-      <img src={imgUrl} alt="device picture" />
+      <img src={imgUrl} alt='device picture' />
       <S.Right>
         <S.DetailsLine>
           <p>Product Line</p>
