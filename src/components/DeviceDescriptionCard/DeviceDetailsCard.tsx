@@ -22,10 +22,11 @@ const DeviceDetailsCard: React.FC<DeviceDetailsProps> = ({ device }) => {
   return (
     <HStack minH={'256px'} w={'688px'} m={'206px auto 0 auto'} gap={'32px'}>
       <Image src={imgUrl} alt='device image' objectFit='cover' />
-      <VStack w={'full'}>
+      <VStack w={'full'} gap={'0'}>
         {renderDescription.map((descriptionLine, i) => {
           return (
             <HStack
+              p={'2px 0 2px 0'}
               w={'full'}
               borderBottom={'solid 1px'}
               borderBottomColor={'neutral3'}

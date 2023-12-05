@@ -12,6 +12,7 @@ const DeviceListItem: React.FC<DeviceListItemProps> = ({
 }) => {
   return (
     <Box
+      p={'4px 0 4px 0'}
       w={'full'}
       borderBottom={'solid 1px'}
       borderBottomColor={'neutral3'}

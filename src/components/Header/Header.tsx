@@ -11,7 +11,14 @@ function Header() {
     >
       <HStack gap={4}>
         <Logo />
-        <Heading color={'neutral8'}>Devices</Heading>
+        <Text
+          fontSize={'20px'}
+          lineHeight={'28px'}
+          letterSpacing={'-0.5px'}
+          color={'neutral8'}
+        >
+          Devices
+        </Text>
       </HStack>
       <Text>Kaspars Lasinskis</Text>
     </HStack>

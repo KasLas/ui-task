@@ -1,4 +1,4 @@
-import { Box, VStack, Image, Skeleton, Text, Heading } from '@chakra-ui/react';
+import { Box, VStack, Image, Skeleton, Text } from '@chakra-ui/react';
 import { ListItem } from '../../utils/types';
 
 interface DeviceCardProps {
@@ -31,10 +31,12 @@ const DeviceCard: React.FC<DeviceCardProps> = ({ item, onClickHandler }) => {
           />
         </Box>
         <VStack p={'12px'} w={'full'} alignItems={'flex-start'} gap={'0'}>
-          <Heading as={'h6'} size={'sm'} noOfLines={1}>
+          <Text fontWeight={'700'} noOfLines={1}>
             {item.name}
-          </Heading>
-          <Text>{item.productLine}</Text>
+          </Text>
+          <Text fontSize={'12px'} lineHeight={'20px'} color={'text3'}>
+            {item.productLine}
+          </Text>
         </VStack>
       </VStack>
     </Box>

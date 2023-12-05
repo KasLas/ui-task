@@ -20,8 +20,18 @@ export const extendedTheme = extendTheme({
     text2: 'rgba(0, 0, 0, 0.65)',
     text3: 'rgba(0, 0, 0, 0.45)',
   },
+  fonts: {
+    body: 'Lato',
+    heading: 'Lato',
+  },
   components: {
     Checkbox: checkboxTheme,
     Popover: popoverTheme,
+    Text: {
+      baseStyle: {
+        fontSize: '14px',
+        lineHeight: '24px',
+      },
+    },
   },
 });

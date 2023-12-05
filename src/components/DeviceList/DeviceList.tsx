@@ -15,7 +15,7 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
   }
 
   return (
-    <VStack>
+    <VStack gap={'0'}>
       <Grid gridTemplateColumns={'130px 250px 1fr'} gap={4} w={'full'}>
         <GridItem>
           <Text>{`${listData?.length} devices`}</Text>
