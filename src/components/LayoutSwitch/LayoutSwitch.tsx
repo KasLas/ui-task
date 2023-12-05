@@ -38,7 +38,8 @@ const LayoutSwitch = () => {
   const { getRadioProps, getRootProps } = useRadioGroup({
     defaultValue: switchValue ? switchValue : 'list',
     onChange: (nextValue) => {
-      setSearchParams({ view: nextValue });
+      const currentSearchParams = Object.fromEntries([...searchParams]);
+      setSearchParams({ ...currentSearchParams, view: nextValue });
     },
   });
 

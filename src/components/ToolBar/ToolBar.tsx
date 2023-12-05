@@ -10,7 +10,6 @@ interface ToolBarProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   filterOptions: FilterOptions[];
-  onFilterChange: (event: any) => void;
   handleSearchClear: () => void;
   searchTerm: string;
 }
@@ -18,7 +17,6 @@ interface ToolBarProps {
 const ToolBar: React.FC<ToolBarProps> = ({
   handleSearchInput,
   filterOptions,
-  onFilterChange,
   handleSearchClear,
   searchTerm,
 }) => {
@@ -37,11 +35,7 @@ const ToolBar: React.FC<ToolBarProps> = ({
       />
       <HStack gap={4}>
         <LayoutSwitch />
-        <Select
-          filterOptions={filterOptions}
-          onChange={onFilterChange}
-          value='temp'
-        />
+        <Select filterOptions={filterOptions} />
       </HStack>
     </HStack>
   );

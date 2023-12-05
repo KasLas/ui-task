@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Text,
   Popover,
@@ -15,11 +16,12 @@ import { FilterOptions } from '../../utils/types';
 
 interface SelectOptions {
   filterOptions: FilterOptions[];
-  onChange: (event: any) => void;
-  value: string;
 }
 
-const Select: React.FC<SelectOptions> = ({ filterOptions, onChange }) => {
+const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const defaultValues = searchParams.get('filter')?.split(',');
+
   return (
     <Popover>
       <PopoverTrigger>
@@ -36,7 +38,13 @@ const Select: React.FC<SelectOptions> = ({ filterOptions, onChange }) => {
       >
         <PopoverHeader padding={'12px 14px 12px 24px'}>Filter</PopoverHeader>
         <PopoverCloseButton />
-        <CheckboxGroup colorScheme='green' onChange={onChange}>
+        <CheckboxGroup
+          defaultValue={defaultValues ? defaultValues : undefined}
+          onChange={(value: string[]) => {
+            const currentSearchParams = Object.fromEntries([...searchParams]);
+            setSearchParams({ ...currentSearchParams, filter: String(value) });
+          }}
+        >
           <Box p={'20px'}>
             <VStack alignItems={'flex-start'} gap={4}>
               {filterOptions.map((option) => {

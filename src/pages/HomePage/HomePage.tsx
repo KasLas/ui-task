@@ -14,17 +14,15 @@ function HomePage({
 }) {
   const [searchparams] = useSearchParams();
   const layout = searchparams.get('view');
+  const filter = searchparams.get('filter');
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterValue, setFilterValue] = useState<string[]>([]);
+
+  const filterValue = filter ? filter.split(',') : [];
 
   function handleSearchInput(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     setSearchTerm(e.target.value.toLocaleLowerCase());
-  }
-
-  function handleFilterSelect(event: any) {
-    setFilterValue(event);
   }
 
   function handleSearchClear() {
@@ -85,7 +83,6 @@ function HomePage({
           <ToolBar
             handleSearchInput={handleSearchInput}
             filterOptions={filterOptions}
-            onFilterChange={handleFilterSelect}
             handleSearchClear={handleSearchClear}
             searchTerm={searchTerm}
           />
