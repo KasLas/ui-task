@@ -94,9 +94,7 @@ function HomePage({
           />
           <DeviceListContainer devices={renderDevices} layout={layout} />
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   );
 }

@@ -1,9 +1,11 @@
 import React, { useMemo } from 'react';
 import { Box } from '@chakra-ui/react';
-import { Device } from '../../utils/types';
-import { IMG_BASE_URL } from '../../utils/constants';
 import DeviceList from '../DeviceList';
 import DeviceGrid from '../DeviceGrid';
+import { Device } from '../../utils/types';
+import { IMG_BASE_URL } from '../../utils/constants';
+import { getImgDimensions } from './utils';
+import { IMG_DIMENSIONS } from '../../utils/constants';
 
 export interface DeviceListProps {
   devices?: Device[];
@@ -16,13 +18,13 @@ const DeviceListContainer: React.FC<DeviceListProps> = ({
 }) => {
   const listData = useMemo(() => {
     return devices?.map((device) => {
-      const smallIconDimensions =
+      const imgResolution =
         layout === 'list'
-          ? device.icon.resolutions[0]
-          : device.icon.resolutions[4];
+          ? getImgDimensions(device.icon.resolutions, IMG_DIMENSIONS.sm)
+          : getImgDimensions(device.icon.resolutions, IMG_DIMENSIONS.md);
       return {
         id: device.id,
-        img: `${IMG_BASE_URL}${device.icon.id}_${smallIconDimensions[0]}x${smallIconDimensions[1]}.png`,
+        img: `${IMG_BASE_URL}${device.icon.id}_${imgResolution.x}x${imgResolution.y}.png`,
         productLine: device.line.name,
         name: device.product.name,
       };

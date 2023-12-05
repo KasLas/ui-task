@@ -1,6 +1,8 @@
+export type Resolution = [number, number];
+
 export type Icon = {
   id: string;
-  resolutions: number[][];
+  resolutions: Resolution[];
 };
 
 export type Line = {

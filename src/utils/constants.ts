@@ -5,3 +5,9 @@ export enum COLORS {
   defaultBorder = '#ededf0',
   darkBorder = '#DBDCE1',
 }
+
+export enum IMG_DIMENSIONS {
+  sm = 25,
+  md = 101,
+  xl = 256,
+}
