@@ -53,3 +53,13 @@ export type ListItem = {
   productLine: string;
   name: string;
 };
+
+export type Description = {
+  path: string;
+  displayText: string;
+};
+
+export type RenderDescriptionData = {
+  title: string;
+  value: string;
+};

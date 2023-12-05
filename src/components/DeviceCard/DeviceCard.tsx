@@ -1,5 +1,5 @@
 import { Box, VStack, Image, Skeleton, Text, Heading } from '@chakra-ui/react';
-import { ListItem } from '../DeviceList/DeviceList';
+import { ListItem } from '../../utils/types';
 
 interface DeviceCardProps {
   item: ListItem;

@@ -29,7 +29,11 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
       </Grid>
       {listData?.map((item) => {
         return (
-          <DeviceListItem item={item} itemClickHandler={handleItemClick} />
+          <DeviceListItem
+            key={item.id}
+            item={item}
+            itemClickHandler={handleItemClick}
+          />
         );
       })}
     </VStack>
