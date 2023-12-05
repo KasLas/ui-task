@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import {
   useRadio,
   Box,
@@ -31,14 +32,14 @@ const icons = [
   { name: 'grid', icon: GridIcon, activeIcon: GridIconActive },
 ];
 
-const LayoutSwitch = ({
-  layoutToggle,
-}: {
-  layoutToggle: (select: string) => void;
-}) => {
+const LayoutSwitch = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const switchValue = searchParams.get('view');
   const { getRadioProps, getRootProps } = useRadioGroup({
-    defaultValue: 'list',
-    onChange: layoutToggle,
+    defaultValue: switchValue ? switchValue : 'list',
+    onChange: (nextValue) => {
+      setSearchParams({ view: nextValue });
+    },
   });
 
   return (

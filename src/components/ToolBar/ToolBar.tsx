@@ -6,7 +6,6 @@ import Search from '../Search/Search';
 import LayoutSwitch from '../LayoutSwitch';
 
 interface ToolBarProps {
-  layoutToggle: (select: string) => void;
   handleSearchInput: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -17,7 +16,6 @@ interface ToolBarProps {
 }
 
 const ToolBar: React.FC<ToolBarProps> = ({
-  layoutToggle,
   handleSearchInput,
   filterOptions,
   onFilterChange,
@@ -38,7 +36,7 @@ const ToolBar: React.FC<ToolBarProps> = ({
         value={searchTerm}
       />
       <HStack gap={4}>
-        <LayoutSwitch layoutToggle={layoutToggle} />
+        <LayoutSwitch />
         <Select
           filterOptions={filterOptions}
           onChange={onFilterChange}

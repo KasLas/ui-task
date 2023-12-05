@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Spinner, Center, Alert, AlertIcon } from '@chakra-ui/react';
 import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
@@ -11,13 +12,10 @@ function HomePage({
   data?: QueryDeviceData;
   status: string;
 }) {
-  const [layout, setLayout] = useState('list');
+  const [searchparams] = useSearchParams();
+  const layout = searchparams.get('view');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterValue, setFilterValue] = useState<string[]>([]);
-
-  function layoutToggle(select: string) {
-    setLayout(select);
-  }
 
   function handleSearchInput(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -85,14 +83,16 @@ function HomePage({
       {status === 'success' && data?.devices ? (
         <>
           <ToolBar
-            layoutToggle={layoutToggle}
             handleSearchInput={handleSearchInput}
             filterOptions={filterOptions}
             onFilterChange={handleFilterSelect}
             handleSearchClear={handleSearchClear}
             searchTerm={searchTerm}
           />
-          <DeviceListContainer devices={renderDevices} layout={layout} />
+          <DeviceListContainer
+            devices={renderDevices}
+            layout={layout ? layout : 'list'}
+          />
         </>
       ) : null}
     </>
