@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Flex } from '@chakra-ui/react';
 import DeviceCard from '../DeviceCard';
-import { ListItem } from '../DeviceList/DeviceList';
-import * as S from './styles';
+import { ListItem } from '../../utils/types';
 
 interface DeviceGridProps {
   gridData?: ListItem[];
@@ -16,7 +16,7 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
   }
 
   return (
-    <S.GridContainer>
+    <Flex gap={'24px'} flexWrap={'wrap'}>
       {gridData?.map((item) => {
         return (
           <DeviceCard
@@ -26,7 +26,7 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
           />
         );
       })}
-    </S.GridContainer>
+    </Flex>
   );
 };
 
