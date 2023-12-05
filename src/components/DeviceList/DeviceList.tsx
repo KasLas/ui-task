@@ -1,12 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Box, VStack, Text, Grid, GridItem } from '@chakra-ui/react';
-
-export type ListItem = {
-  id: string;
-  img: string;
-  productLine: string;
-  name: string;
-};
+import { VStack, Text, Grid, GridItem } from '@chakra-ui/react';
+import { ListItem } from '../../utils/types';
+import DeviceListItem from '../DeviceListItem';
 
 interface ListDataProps {
   listData?: ListItem[];
@@ -34,29 +29,7 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
       </Grid>
       {listData?.map((item) => {
         return (
-          <Box
-            w={'full'}
-            borderBottom={'solid 1px'}
-            borderBottomColor={'neutral3'}
-            cursor={'pointer'}
-            _hover={{ bg: 'hover' }}
-            key={item.id}
-            onClick={() => {
-              handleItemClick(item.id);
-            }}
-          >
-            <Grid gridTemplateColumns={'130px 250px 1fr'} gap={4}>
-              <GridItem>
-                <img src={item.img} alt='product picture' />
-              </GridItem>
-              <GridItem>
-                <Text>{item.productLine}</Text>
-              </GridItem>
-              <GridItem>
-                <Text>{item.name}</Text>
-              </GridItem>
-            </Grid>
-          </Box>
+          <DeviceListItem item={item} itemClickHandler={handleItemClick} />
         );
       })}
     </VStack>

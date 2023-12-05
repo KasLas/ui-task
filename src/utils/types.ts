@@ -37,12 +37,6 @@ export type Device = {
   uisp: Uisp;
 };
 
-export type DevicesSlice = {
-  devices: Device[];
-  isLoading: boolean;
-  error: string;
-};
-
 export type FilterOptions = {
   value: string;
   name: string;
@@ -51,4 +45,11 @@ export type FilterOptions = {
 export type QueryDeviceData = {
   devices: Device[];
   version: string;
+};
+
+export type ListItem = {
+  id: string;
+  img: string;
+  productLine: string;
+  name: string;
 };
