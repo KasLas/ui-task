@@ -10,7 +10,6 @@ import axios from 'axios';
 
 const getDevices = async () => {
   const response = await axios.get<QueryDeviceData>(DEVICES_URL);
-
   return response.data;
 };
 
