@@ -1,8 +1,7 @@
 import React from 'react';
-import { HStack, VStack, Image } from '@chakra-ui/react';
+import { HStack, VStack, Image, Text } from '@chakra-ui/react';
 import { Device } from '../../utils/types';
 import { IMG_BASE_URL, IMG_DIMENSIONS } from '../../utils/constants';
-import * as S from './styles';
 import { getImgDimensions } from '../DeviceListContainer/utils';
 import { getDeviceDescription, neededDescription } from './utils';
 
@@ -26,10 +25,16 @@ const DeviceDetailsCard: React.FC<DeviceDetailsProps> = ({ device }) => {
       <VStack w={'full'}>
         {renderDescription.map((descriptionLine, i) => {
           return (
-            <S.DetailsLine key={i}>
-              <p>{descriptionLine.title}</p>
-              <p>{descriptionLine.value}</p>
-            </S.DetailsLine>
+            <HStack
+              w={'full'}
+              borderBottom={'solid 1px'}
+              borderBottomColor={'neutral3'}
+              justifyContent={'space-between'}
+              key={i}
+            >
+              <Text>{descriptionLine.title}</Text>
+              <Text>{descriptionLine.value}</Text>
+            </HStack>
           );
         })}
       </VStack>
