@@ -12,6 +12,9 @@ const sizes = {
     control: defineStyle({
       boxSize: '16px',
       borderRadius: 4,
+      _checked: {
+        backgroundColor: 'blue6',
+      },
     }),
   }),
 };

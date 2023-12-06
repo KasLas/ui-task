@@ -12,6 +12,7 @@ import {
   PopoverHeader,
 } from '@chakra-ui/react';
 import { FilterOptions } from '../../utils/types';
+import CheckedIcon from '../Icons/CheckedIcon';
 
 interface SelectOptions {
   filterOptions: FilterOptions[];
@@ -68,8 +69,9 @@ const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
               {filterOptions.map((option) => {
                 return (
                   <Checkbox
+                    icon={<CheckedIcon />}
+                    defaultChecked
                     size={'custom'}
-                    fontSize={'14px'}
                     pt={'4px'}
                     pb={'4px'}
                     colorScheme='blue'
