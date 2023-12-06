@@ -1,6 +1,8 @@
+export type Resolution = [number, number];
+
 export type Icon = {
   id: string;
-  resolutions: number[][];
+  resolutions: Resolution[];
 };
 
 export type Line = {
@@ -35,13 +37,29 @@ export type Device = {
   uisp: Uisp;
 };
 
-export type DevicesSlice = {
-  devices: Device[];
-  isLoading: boolean;
-  error: string;
-};
-
 export type FilterOptions = {
   value: string;
   name: string;
+};
+
+export type QueryDeviceData = {
+  devices: Device[];
+  version: string;
+};
+
+export type ListItem = {
+  id: string;
+  img: string;
+  productLine: string;
+  name: string;
+};
+
+export type Description = {
+  path: string;
+  displayText: string;
+};
+
+export type RenderDescriptionData = {
+  title: string;
+  value: string;
 };

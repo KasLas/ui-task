@@ -1,35 +1,28 @@
 import { useMemo, useState } from 'react';
-import { SelectChangeEvent } from '@mui/material/Select';
+import { useSearchParams } from 'react-router-dom';
+import { Spinner, Center, Alert, AlertIcon } from '@chakra-ui/react';
 import DeviceListContainer from '../../components/DeviceListContainer';
 import ToolBar from '../../components/ToolBar/ToolBar';
-import { getDeviceSlice } from '../../features/devices/devicesSelector';
-import { useGetDevices } from '../../hooks/useGetDevices';
-import { FilterOptions, Line } from '../../utils/types';
+import { QueryDeviceData, FilterOptions, Line } from '../../utils/types';
 
-function HomePage() {
-  const [isList, setIsList] = useState(true);
+function HomePage({
+  data,
+  status,
+}: {
+  data?: QueryDeviceData;
+  status: string;
+}) {
+  const [searchparams] = useSearchParams();
+  const layout = searchparams.get('view');
+  const filter = searchparams.get('filter');
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterValue, setFilterValue] = useState('');
-  useGetDevices();
 
-  const { isLoading, devices, error } = getDeviceSlice();
-
-  function switchToList() {
-    setIsList(true);
-  }
-
-  function switchToGrid() {
-    setIsList(false);
-  }
+  const filterValue = filter ? filter.split(',') : [];
 
   function handleSearchInput(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     setSearchTerm(e.target.value.toLocaleLowerCase());
-  }
-
-  function handleFilterSelect(event: SelectChangeEvent) {
-    setFilterValue(event?.target.value as string);
   }
 
   function handleSearchClear() {
@@ -38,25 +31,23 @@ function HomePage() {
 
   const searchDevices = useMemo(() => {
     return searchTerm
-      ? devices.filter((device) =>
+      ? data?.devices.filter((device) =>
           device.product.name.toLocaleLowerCase().includes(searchTerm)
         )
-      : devices;
-  }, [devices, searchTerm]);
+      : data?.devices;
+  }, [data?.devices, searchTerm]);
 
   const renderDevices = useMemo(() => {
-    return filterValue
-      ? searchDevices.filter(
-          (device) =>
-            device.line.id.toLocaleLowerCase() ===
-            filterValue.toLocaleLowerCase()
+    return filterValue.length > 0
+      ? searchDevices?.filter((device) =>
+          filterValue.includes(device.line.id.toLocaleLowerCase())
         )
       : searchDevices;
   }, [filterValue, searchDevices]);
 
   const filterOptions: FilterOptions[] = useMemo(() => {
     const options = new Set();
-    devices.forEach((device) => {
+    data?.devices.forEach((device) => {
       options.add(JSON.stringify(device.line));
     });
     const optArr: string[] = Array.from(options) as string[];
@@ -65,32 +56,42 @@ function HomePage() {
       const obj: Line = JSON.parse(opt);
       return { value: obj.id, name: obj.name };
     });
-    return [{ value: '', name: 'All Devices' }, ...opt];
-  }, [devices]);
+    return opt;
+  }, [data?.devices]);
 
-  if (error) {
-    return <h3>Something went horribly wrong</h3>;
+  if (status === 'error') {
+    return (
+      <Alert status='error'>
+        <AlertIcon />
+        There was an error processing your request
+      </Alert>
+    );
+  }
+
+  if (status === 'pending') {
+    return (
+      <Center mt={'200px'}>
+        <Spinner size={'xl'} thickness='4px' color='neutral8' />
+      </Center>
+    );
   }
 
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
+      {status === 'success' && data?.devices ? (
         <>
           <ToolBar
-            gridClick={switchToGrid}
-            listClick={switchToList}
             handleSearchInput={handleSearchInput}
             filterOptions={filterOptions}
-            onFilterChange={handleFilterSelect}
-            filterValue={filterValue}
             handleSearchClear={handleSearchClear}
             searchTerm={searchTerm}
           />
-          <DeviceListContainer devices={renderDevices} isList={isList} />
+          <DeviceListContainer
+            devices={renderDevices}
+            layout={layout ? layout : 'list'}
+          />
         </>
-      )}
+      ) : null}
     </>
   );
 }

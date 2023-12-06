@@ -1,51 +1,43 @@
-import IconButton from '../IconButton';
-import * as S from './styles';
-import Search from '../Search';
-import Select from '../Select';
 import React from 'react';
+import { HStack } from '@chakra-ui/react';
+import Select from '../Select';
 import { FilterOptions } from '../../utils/types';
-import { SelectChangeEvent } from '@mui/material';
+import Search from '../Search/Search';
+import LayoutSwitch from '../LayoutSwitch';
 
 interface ToolBarProps {
-  listClick: () => void;
-  gridClick: () => void;
   handleSearchInput: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   filterOptions: FilterOptions[];
-  onFilterChange: (event: SelectChangeEvent) => void;
-  filterValue: string;
   handleSearchClear: () => void;
   searchTerm: string;
 }
 
 const ToolBar: React.FC<ToolBarProps> = ({
-  listClick,
-  gridClick,
   handleSearchInput,
   filterOptions,
-  onFilterChange,
-  filterValue,
   handleSearchClear,
   searchTerm,
 }) => {
   return (
-    <S.ToolBarWrapper>
+    <HStack
+      justifyContent={'space-between'}
+      p={'8px 30px'}
+      borderBottom={'solid'}
+      borderBottomColor={'neutral3'}
+      borderBottomWidth={'1px'}
+    >
       <Search
         onChange={handleSearchInput}
         onCloseClick={handleSearchClear}
         value={searchTerm}
       />
-      <S.Right>
-        <IconButton variant="list" onClick={listClick} />
-        <IconButton variant="grid" onClick={gridClick} />
-        <Select
-          filterOptions={filterOptions}
-          onChange={onFilterChange}
-          value={filterValue}
-        />
-      </S.Right>
-    </S.ToolBarWrapper>
+      <HStack gap={4}>
+        <LayoutSwitch />
+        <Select filterOptions={filterOptions} />
+      </HStack>
+    </HStack>
   );
 };
 

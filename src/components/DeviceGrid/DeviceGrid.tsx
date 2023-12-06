@@ -1,10 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ListItem } from '../DeviceList/DeviceList';
-import * as S from './styles';
+import { Flex } from '@chakra-ui/react';
+import DeviceCard from '../DeviceCard';
+import { ListItem } from '../../utils/types';
 
 interface DeviceGridProps {
-  gridData: ListItem[];
+  gridData?: ListItem[];
 }
 
 const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
@@ -15,26 +16,17 @@ const DeviceGrid: React.FC<DeviceGridProps> = ({ gridData }) => {
   }
 
   return (
-    <S.GridContainer>
-      {gridData.map((item) => {
+    <Flex gap={'24px'} flexWrap={'wrap'}>
+      {gridData?.map((item) => {
         return (
-          <S.ContentWrapper
+          <DeviceCard
             key={item.id}
-            onClick={() => {
-              handleCardClick(item.id);
-            }}
-          >
-            <S.ImgWrapper>
-              <img src={item.img} alt="product image" />
-            </S.ImgWrapper>
-            <S.TextWrapper>
-              <h4> {item.name}</h4>
-              <p>{item.productLine}</p>
-            </S.TextWrapper>
-          </S.ContentWrapper>
+            item={item}
+            onClickHandler={handleCardClick}
+          />
         );
       })}
-    </S.GridContainer>
+    </Flex>
   );
 };
 

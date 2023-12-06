@@ -1,16 +1,19 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { getDevices } from '../../features/devices/devicesSelector';
-import { useGetDevices } from '../../hooks/useGetDevices';
 import TopBar from '../../components/TopBar';
 import DeviceDescriptionCard from '../../components/DeviceDescriptionCard';
+import { QueryDeviceData } from '../../utils/types';
 
-function ProductDetailsPage() {
+function ProductDetailsPage({
+  data,
+}: {
+  data?: QueryDeviceData;
+  status: string;
+}) {
   const navigate = useNavigate();
-  useGetDevices();
-  const devices = getDevices();
+
   const { deviceid } = useParams();
 
-  const device = devices.find((device) => device.id === deviceid);
+  const device = data?.devices.find((device) => device.id === deviceid);
 
   function handleBackClick() {
     navigate(-1);

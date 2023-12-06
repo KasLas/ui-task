@@ -1,16 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-
-import * as S from './styles';
-
-export type ListItem = {
-  id: string;
-  img: string;
-  productLine: string;
-  name: string;
-};
+import { VStack, Text, Grid, GridItem } from '@chakra-ui/react';
+import { ListItem } from '../../utils/types';
+import DeviceListItem from '../DeviceListItem';
 
 interface ListDataProps {
-  listData: ListItem[];
+  listData?: ListItem[];
 }
 
 const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
@@ -21,31 +15,28 @@ const DeviceList: React.FC<ListDataProps> = ({ listData }) => {
   }
 
   return (
-    <ul>
-      <S.ItemWrapper>
-        <p>{`${listData.length} devices`}</p>
-        <S.BoldParagraph>PRODUCT LINE</S.BoldParagraph>
-        <S.BoldParagraph>NAME</S.BoldParagraph>
-      </S.ItemWrapper>
-      {listData.map((item) => {
+    <VStack gap={'0'}>
+      <Grid gridTemplateColumns={'130px 250px 1fr'} gap={4} w={'full'}>
+        <GridItem>
+          <Text>{`${listData?.length} devices`}</Text>
+        </GridItem>
+        <GridItem>
+          <Text fontWeight={'700'}>PRODUCT LINE</Text>
+        </GridItem>
+        <GridItem>
+          <Text fontWeight={'700'}>NAME</Text>
+        </GridItem>
+      </Grid>
+      {listData?.map((item) => {
         return (
-          <S.HoverContainer
+          <DeviceListItem
             key={item.id}
-            onClick={() => {
-              handleItemClick(item.id);
-            }}
-          >
-            <S.ItemWrapper>
-              <S.ImgWrapper>
-                <img src={item.img} alt="product picture" />
-              </S.ImgWrapper>
-              <p>{item.productLine}</p>
-              <p>{item.name}</p>
-            </S.ItemWrapper>
-          </S.HoverContainer>
+            item={item}
+            itemClickHandler={handleItemClick}
+          />
         );
       })}
-    </ul>
+    </VStack>
   );
 };
 

@@ -1,40 +1,90 @@
-import React from 'react';
-import { Box, FormControl, InputLabel, MenuItem } from '@mui/material';
-import MuSelect, { SelectChangeEvent } from '@mui/material/Select';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
+import {
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  CheckboxGroup,
+  VStack,
+  Checkbox,
+  PopoverCloseButton,
+  PopoverHeader,
+} from '@chakra-ui/react';
 import { FilterOptions } from '../../utils/types';
 
 interface SelectOptions {
   filterOptions: FilterOptions[];
-  onChange: (event: SelectChangeEvent) => void;
-  value: string;
 }
 
-const Select: React.FC<SelectOptions> = ({
-  filterOptions,
-  onChange,
-  value,
-}) => {
+const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
+  const [defaultValues, setDefaultValues] = useState(['']);
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setDefaultValues(searchParams.get('filter')?.split(',') || []);
+  }, [location]);
+
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Filter</InputLabel>
-        <MuSelect
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={value}
-          label="Filter"
-          onChange={onChange}
+    <Popover>
+      <PopoverTrigger>
+        <Text cursor={'pointer'}>Filter</Text>
+      </PopoverTrigger>
+      <PopoverContent
+        bg={'neutral0'}
+        mt={'-44px'}
+        w={'256px'}
+        borderRadius={'0px'}
+        border={'none'}
+        boxShadow={' 0px 12px 48px 0px rgba(0, 0, 0, 0.15)'}
+        _focusVisible={{ outline: 'none' }}
+      >
+        <PopoverHeader as={Text} padding={'12px 14px 12px 24px'}>
+          Filter
+        </PopoverHeader>
+        <PopoverCloseButton />
+        <VStack
+          p={'0 24px 32px 23px'}
+          mt={'20px'}
+          gap={'20px'}
+          w={'full'}
+          alignItems={'flex-start'}
         >
-          {filterOptions.map((option) => {
-            return (
-              <MenuItem key={option.value} value={option.value}>
-                {option.name}
-              </MenuItem>
-            );
-          })}
-        </MuSelect>
-      </FormControl>
-    </Box>
+          <Text fontWeight={'700'} color={'text1'}>
+            Product line
+          </Text>
+          <CheckboxGroup
+            value={defaultValues}
+            onChange={(value: string[]) => {
+              const currentSearchParams = Object.fromEntries([...searchParams]);
+              setSearchParams({
+                ...currentSearchParams,
+                filter: String(value),
+              });
+            }}
+          >
+            <VStack alignItems={'flex-start'} w={'full'} gap={'0px'}>
+              {filterOptions.map((option) => {
+                return (
+                  <Checkbox
+                    size={'custom'}
+                    fontSize={'14px'}
+                    pt={'4px'}
+                    pb={'4px'}
+                    colorScheme='blue'
+                    key={option.name}
+                    value={option.value}
+                  >
+                    {option.name}
+                  </Checkbox>
+                );
+              })}
+            </VStack>
+          </CheckboxGroup>
+        </VStack>
+      </PopoverContent>
+    </Popover>
   );
 };
 

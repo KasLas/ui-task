@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './app/store.ts';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ChakraProvider } from '@chakra-ui/react';
 import App from './App.tsx';
-import './index.css';
+import { extendedTheme } from './theme/extendedTheme.ts';
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
+  <>
     <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ChakraProvider theme={extendedTheme}>
+            <App />
+          </ChakraProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
     </React.StrictMode>
-  </Provider>
+  </>
 );

@@ -1,41 +1,44 @@
 import React, { useMemo } from 'react';
-import { Device } from '../../utils/types';
-import * as S from './styles';
-import { IMG_BASE_URL } from '../../utils/constants';
+import { Box } from '@chakra-ui/react';
 import DeviceList from '../DeviceList';
 import DeviceGrid from '../DeviceGrid';
+import { Device } from '../../utils/types';
+import { IMG_BASE_URL } from '../../utils/constants';
+import { getImgDimensions } from './utils';
+import { IMG_DIMENSIONS } from '../../utils/constants';
 
 export interface DeviceListProps {
-  devices: Device[];
-  isList: boolean;
+  devices?: Device[];
+  layout: string;
 }
 
 const DeviceListContainer: React.FC<DeviceListProps> = ({
   devices,
-  isList,
+  layout,
 }) => {
   const listData = useMemo(() => {
-    return devices.map((device) => {
-      const smallIconDimensions = isList
-        ? device.icon.resolutions[0]
-        : device.icon.resolutions[4];
+    return devices?.map((device) => {
+      const imgResolution =
+        layout === 'list'
+          ? getImgDimensions(device.icon.resolutions, IMG_DIMENSIONS.sm)
+          : getImgDimensions(device.icon.resolutions, IMG_DIMENSIONS.md);
       return {
         id: device.id,
-        img: `${IMG_BASE_URL}${device.icon.id}_${smallIconDimensions[0]}x${smallIconDimensions[1]}.png`,
+        img: `${IMG_BASE_URL}${device.icon.id}_${imgResolution.x}x${imgResolution.y}.png`,
         productLine: device.line.name,
         name: device.product.name,
       };
     });
-  }, [devices, isList]);
+  }, [devices, layout]);
 
   return (
-    <S.TableWrapper>
-      {isList ? (
+    <Box p={'23px 24px 80px 80px'}>
+      {layout === 'list' ? (
         <DeviceList listData={listData} />
       ) : (
         <DeviceGrid gridData={listData} />
       )}
-    </S.TableWrapper>
+    </Box>
   );
 };
 
