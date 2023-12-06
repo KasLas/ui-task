@@ -1,13 +1,19 @@
-import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
+import { createMultiStyleConfigHelpers, defineStyle } from '@chakra-ui/react';
 import { checkboxAnatomy } from '@chakra-ui/anatomy';
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(checkboxAnatomy.keys);
 
-const baseStyle = definePartsStyle({
-  control: {
-    borderRadius: 4,
-  },
-});
+const sizes = {
+  custom: definePartsStyle({
+    label: defineStyle({
+      fontSize: '14px',
+    }),
+    control: defineStyle({
+      boxSize: '16px',
+      borderRadius: 4,
+    }),
+  }),
+};
 
-export const checkboxTheme = defineMultiStyleConfig({ baseStyle });
+export const checkboxTheme = defineMultiStyleConfig({ sizes });

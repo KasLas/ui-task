@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import {
   Text,
   Popover,
@@ -10,7 +10,6 @@ import {
   Checkbox,
   PopoverCloseButton,
   PopoverHeader,
-  Box,
 } from '@chakra-ui/react';
 import { FilterOptions } from '../../utils/types';
 
@@ -19,8 +18,13 @@ interface SelectOptions {
 }
 
 const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
+  const [defaultValues, setDefaultValues] = useState(['']);
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const defaultValues = searchParams.get('filter')?.split(',');
+
+  useEffect(() => {
+    setDefaultValues(searchParams.get('filter')?.split(',') || []);
+  }, [location]);
 
   return (
     <Popover>
@@ -36,20 +40,38 @@ const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
         boxShadow={' 0px 12px 48px 0px rgba(0, 0, 0, 0.15)'}
         _focusVisible={{ outline: 'none' }}
       >
-        <PopoverHeader padding={'12px 14px 12px 24px'}>Filter</PopoverHeader>
+        <PopoverHeader as={Text} padding={'12px 14px 12px 24px'}>
+          Filter
+        </PopoverHeader>
         <PopoverCloseButton />
-        <CheckboxGroup
-          defaultValue={defaultValues ? defaultValues : undefined}
-          onChange={(value: string[]) => {
-            const currentSearchParams = Object.fromEntries([...searchParams]);
-            setSearchParams({ ...currentSearchParams, filter: String(value) });
-          }}
+        <VStack
+          p={'0 24px 32px 23px'}
+          mt={'20px'}
+          gap={'20px'}
+          w={'full'}
+          alignItems={'flex-start'}
         >
-          <Box p={'20px'}>
-            <VStack alignItems={'flex-start'} gap={4}>
+          <Text fontWeight={'700'} color={'text1'}>
+            Product line
+          </Text>
+          <CheckboxGroup
+            value={defaultValues}
+            onChange={(value: string[]) => {
+              const currentSearchParams = Object.fromEntries([...searchParams]);
+              setSearchParams({
+                ...currentSearchParams,
+                filter: String(value),
+              });
+            }}
+          >
+            <VStack alignItems={'flex-start'} w={'full'} gap={'0px'}>
               {filterOptions.map((option) => {
                 return (
                   <Checkbox
+                    size={'custom'}
+                    fontSize={'14px'}
+                    pt={'4px'}
+                    pb={'4px'}
                     colorScheme='blue'
                     key={option.name}
                     value={option.value}
@@ -59,8 +81,8 @@ const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
                 );
               })}
             </VStack>
-          </Box>
-        </CheckboxGroup>
+          </CheckboxGroup>
+        </VStack>
       </PopoverContent>
     </Popover>
   );
