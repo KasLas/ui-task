@@ -1,4 +1,4 @@
-import { HStack, Heading, Text } from '@chakra-ui/react';
+import { HStack, Text } from '@chakra-ui/react';
 import Logo from '../Logo';
 
 function Header() {
