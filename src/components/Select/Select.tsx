@@ -66,9 +66,10 @@ const Select: React.FC<SelectOptions> = ({ filterOptions }) => {
             }}
           >
             <VStack alignItems={'flex-start'} w={'full'} gap={'0px'}>
-              {filterOptions.map((option) => {
+              {filterOptions.map((option, i) => {
                 return (
                   <Checkbox
+                    id={`${i}`}
                     icon={<CheckedIcon />}
                     defaultChecked
                     size={'custom'}

@@ -14,10 +14,6 @@ app.get('*', (req, res) => {
   res.sendFile('index.html', { root: 'dist' });
 });
 
-app.get('/ping', (req, res) => {
-  res.send({ success: true });
-});
-
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server is listening on port 3000');
 });

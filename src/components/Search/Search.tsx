@@ -25,6 +25,7 @@ const Search: React.FC<SearchProps> = ({ value, onChange, onCloseClick }) => {
         <Icon as={SearchIcon} />
       </InputLeftElement>
       <Input
+        id='search'
         value={value}
         onChange={onChange}
         h={8}
